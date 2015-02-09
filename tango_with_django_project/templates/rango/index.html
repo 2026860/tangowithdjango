@@ -1,4 +1,32 @@
-<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+
+        {% if user.is_authenticated %}
+            <h1>Rango says... hello {{ user.username }}!</h1>
+        {% else %}
+            <h1>Rango says... hello world!</h1>
+        {% endif %}
+
+        {% if categories %}
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+       {% else %}
+            <strong>There are no categories present.</strong>   
+       {% endif %}
+       
+
+{% endblock %}
+
+
+
+
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <title>Rango</title>
@@ -14,7 +42,7 @@
         {% if categories %}
             <ul>
                 {% for category in categories %}
-                <li><a href="/rango/category/{{category.slug}}">{{ category.name }}</a></li>
+                <li><a href="{% url 'category' category.slug%}">{{ category.name }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
@@ -39,4 +67,5 @@
         <a href="/rango/register/">Register Here</a><br/>
         <a href="/rango/login/">Login</a> -->
     </body>
-</html>
+</html> -->
+
