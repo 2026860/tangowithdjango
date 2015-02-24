@@ -15,15 +15,63 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
+from datetime import datetime
 # Create your views here.
 def index(request):
-    
-    category_list = Category.objects.order_by('-views')[:5]
-    context_dict = {'categories': category_list}
-    return render(request, 'rango/index.html', context_dict)
+    category_list = Category.objects.order_by('-likes')[:5]
+    page_list = Page.objects.order_by('-views')[:5]
+    context_dict = {'categories': category_list, 'pages': page_list}
 
+    # old
+    # visits = int(request.COOKIES.get('visits', '1'))
+    visits = request.session.get('visits')
+    
+    # reset_last_visit_time = False
+    # response = render(request, 'rango/index.html', context_dict)
+    if not visits:
+        visits = 1
+    reset_last_visit_time = False
+
+    last_visit = request.session.get('last_visits')
+    if last_visit:
+        # last_visit = request.COOKIES['last_visit']
+        last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
+
+        # If it's been more than a day since the last visit...
+        if (datetime.now() - last_visit_time).seconds > 0:
+            visits = visits + 1
+            # ...and flag that the cookie last visit needs to be updated
+            reset_last_visit_time = True
+    else:
+        # Cookie last_visit doesn't exist, so flag that it should be set.
+        reset_last_visit_time = True
+
+        # context_dict['visits'] = visits
+
+        #Obtain our Response object early so we can add cookie information.
+        # response = render(request, 'rango/index.html', context_dict)
+
+    if reset_last_visit_time:
+        # response.set_cookie('last_visit', datetime.now())
+        # response.set_cookie('visits', visits)
+        request.session['last_visit'] = str(datetime.now())
+        request.session['visits'] = visits
+    context_dict['visits'] = visits
+    # Return response back to the user, updating any cookies that need changed.
+    response = render(request, 'rango/index.html', context_dict)
+
+    return response
+    #  OLD!!!
+    # request.session.set_test_cookie()   
+    # category_list = Category.objects.order_by('-views')[:5]
+    # context_dict = {'categories': category_list}
+    # return render(request, 'rango/index.html', context_dict)
 def about(request):
-    return render(request, 'rango/about.html')
+    if request.session.get('visits'):
+        count = request.session.get('visits')
+    else:
+        count = 0 
+    return render(request, 'rango/about.html', {'visits':count})
 
 def category(request, category_name_slug):
     
@@ -86,6 +134,9 @@ def add_page(request, category_name_slug):
     return render(request, 'rango/add_page.html', context_dict)
 
 def register(request):
+    # if request.session.test_cookie_worked():
+    #     print ">>>> TEST COOKIE WORKED!"
+    #     request.session.delete_test_cookie()
 
     registered = False
 
