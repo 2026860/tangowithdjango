@@ -38,7 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'rango'
+	'rango',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,7 +95,13 @@ STATICFILES_DIRS = (STATIC_PATH,)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGN_URL = "/rango/login/"
+
+#Registration and Login
+REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+LOGN_REDIRECT_URL = '/rango/'
+LOGN_URL = "/accounts/login/"
  
  #Cookies settings
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
