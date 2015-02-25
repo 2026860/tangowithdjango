@@ -3,24 +3,15 @@
 {% load staticfiles %}
 
 {% block body_block %}
-	<h1>About</h1>
-	<p>This is the about page for the the Rango app</p>
-	<p> You visited rango {{ visits }} times</p>
+	<div class = "page-header">
+		<h1>About</h1>
+	</div>
+	<div>
+	<strong><p>This tutorial has been put together by Konstantin Ivanov, 2026860i</p>
+	<p> You visited rango {{ visits }} times</p></strong>
+
 	<a href="/rango">Index</a><br/>
 	<img src="{% static "images/me.jpg" %}" alt= Rango picture />
+	</div>
 {%endblock%}
 
-<!-- <DOCTYPE! html>
-{% load staticfiles %}
-
-<html>
-	<head>
-		<title>About</title>
-	</head>
-	<body>
-		<h2>About</h2>
-		<p>This is the about page for the Rango app</p>
-		<a href="/rango">Index</a><br/>
-		<img src="{% static "images/me.jpg" %}" alt= Rango picture />
-	</body>
-</html> -->

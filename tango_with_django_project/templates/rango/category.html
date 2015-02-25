@@ -5,7 +5,9 @@
 {% block title %}{{ category_name_slug }}{% endblock %}
 
 {% block body_block %}
+    <div class = "page-header">
     <h1>{{ category_name }}</h1>
+    </div>
     {% if category %}
         {% if pages %}
         <ul>

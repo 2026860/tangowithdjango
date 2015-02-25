@@ -4,7 +4,9 @@
 
 {% block body_block %}
     {% if user.is_authenticated %}
+    <div class = "page-header">
         <h1>Add a category</h1>
+    </div>
 
         <form  id="category_form" method="post" action="/rango/add_category/">
 
