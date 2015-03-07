@@ -5,7 +5,7 @@
 {% block body_block %}
 {% if category %}
 
-        <form role="form-group"  id="page_form" method="post" action="/rango/category/{{category.slug}}/add_page/">
+        <form role="form"  id="page_form" method="post" action="/rango/category/{{category.slug}}/add_page/">
             <h2 class="form-signin-heading">Add a Page to <a href="/rango/category/{{category.slug}}/"> {{ category.name }}</a></h2>
         <div class="form-group" >
                     {% csrf_token %}
