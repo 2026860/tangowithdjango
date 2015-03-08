@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% load staticfiles %}
 {% load rango_extras %}
 
 <html lang="en">
@@ -16,6 +16,9 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static "js/jquery-1.11.1.js" %}"></script>
+    <script src="{% static "js/rango-jquery.js" %}"></script>
   
   </head>
 
@@ -40,6 +43,7 @@
                       <li><a href="{% url 'add_category'%}">Add a New Category</a></li>
            				    <li><a href="{% url 'auth_logout'%}?next=/rango/">Logout</a></li>
            				    <li><a href="{% url 'auth_password_change'%}?next=/rango/">Change Password</a></li>
+                      <li><a href="/rango/profile">Profile</a></li>
 
                     {% else %}
                       <li><a href="{% url 'registration_register' %}">Register Here</a></li>

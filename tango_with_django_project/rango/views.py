@@ -20,6 +20,12 @@ from rango.bing_search import run_query
 
 from django.shortcuts import redirect
 
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.models import User
+
+from django.template import RequestContext
+
 # Create your views here.
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -266,3 +272,20 @@ def track_url(request):
                 except:
                     pass
             return redirect(url)
+
+@login_required
+def like_category(request):
+    cat_id = None
+    if request.method == 'GET':
+        cat_id = request.GET['category_id']
+
+    likes = 0
+    if cat_id:
+        cat = Category.objects.get(id=int(cat_id))
+        if cat:
+            likes = cat.likes + 1
+            cat.likes =  likes
+            cat.save()
+
+    return HttpResponse(likes)
+
