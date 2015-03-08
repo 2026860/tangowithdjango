@@ -25,6 +25,7 @@ class Page(models.Model):
 	title = models.CharField(max_length = 128) 
 	url = models.URLField() 
 	views = models.IntegerField(default = 0)
+	
 
 	def __unicode__(self):
 		return self.title
@@ -36,7 +37,7 @@ class UserProfile(models.Model):
     
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
-
+    email = models.CharField(max_length = 128 )
     
     def __unicode__(self):
         return self.user.username
