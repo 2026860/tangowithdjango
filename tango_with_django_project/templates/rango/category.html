@@ -59,7 +59,7 @@
 
         {% if user.is_authenticated %}
             <ul>
-                <a href="/rango/{{category_name_slug}}/add_page">Add a New Page</a><br/>
+                <a href="/rango/category/{{ category.slug }}/add_page">Add a New Page</a><br/>
             </ul>
                 {% endif %}
         {% else %}

@@ -166,8 +166,7 @@ def add_page(request, category_name_slug):
 
     context_dict = {'form':form, 'category': cat, 'category_name_slug': category_name_slug}
 
-    return render(request, 'rango/add_page.html', context_dict)
-
+    return render(request, 'rango/add_page.html', context_dict)    
 def register(request):
     # if request.session.test_cookie_worked():
     #     print ">>>> TEST COOKIE WORKED!"
