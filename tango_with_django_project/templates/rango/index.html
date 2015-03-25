@@ -18,7 +18,7 @@
                         <h3 class="panel-title">Categories</h3>
                     </div>
                 </div>
-                            {% if categories %}
+                         {% if categories %}
                                 <ul class = "list-group">
                                     {% for category in categories %}
                                         <li class = "list-group-item"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
